@@ -1,0 +1,24 @@
+<h1>Students list View {{totalStudents}}</h1>
+
+<!-- ng - route  -->
+<!-- <div>
+	<ul>
+		<li ng-repeat="student in students">
+			<a href="#/students/{{student.id}}">
+				{{student.name}}
+			</a>
+		</li>
+
+	</ul>
+</div> -->
+
+<!-- ui route -->
+<div>
+	<ul>
+		<li ng-repeat="student in students">
+			<a ui-sref="studentParent.studentDetails({id:student.id})">
+				{{student.name}}
+			</a>
+		</li>
+	</ul>
+</div>

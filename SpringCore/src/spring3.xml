@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!-- 
+		<bean id="triangle" class="com.injectObjects.Triangle">
+			<property name="pointA" ref="point1"/>
+			<property name="pointB" ref="point2"/>
+			<property name="pointC" ref="point3"/>
+		</bean>
+		
+		<bean id="point1" class="com.injectObjects.Point">
+			<property name="x" value="0"/>
+			<property name="y" value="0"/>
+		</bean>
+		
+		<bean id="point2" class="com.injectObjects.Point">
+			<property name="x" value="20"/>
+			<property name="y" value="0"/>
+		</bean>
+		
+		<bean id="point3" class="com.injectObjects.Point">
+			<property name="x" value="0"/>
+			<property name="y" value="20"/>
+		</bean>
+	 -->
+	
+	<!-- Inner bean for same thing above -->
+	
+	<bean id="triangle" class="com.injectObjects.Triangle">
+		<property name="pointA" ref="point1"/>
+		<property name="pointB">
+			<bean class="com.injectObjects.Point">
+				<property name="x" value="20"/>
+				<property name="y" value="0"/>
+			</bean>
+		</property>
+		<property name="pointC">
+			<bean class="com.injectObjects.Point">
+				<property name="x" value="0"/>
+				<property name="y" value="20"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- This PointA 0,0 may be used by other beans so kept it separte -->
+	<bean id="point1" class="com.injectObjects.Point">
+		<property name="x" value="0"/>
+		<property name="y" value="0"/>
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<!-- These two are for non-annotation based controller. These not required for annotation based controllers -->
+	<!--  <bean id="HandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<bean name="/welcome.html" class="com.controllers.HomeController"/> -->
+	
+	<!--  <bean name="/" class="com.controllers.HomeController"/> -->
+	
+	
+	<context:component-scan base-package="com.controllers"/>
+	<context:component-scan base-package="com.api"/>
+
+	<mvc:annotation-driven/>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+			<bean class="com.interceptors.DayOfWeekBasedInterceptor"/>
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+	
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/studentMessages"/>
+	</bean>
+	
+	<bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<map>
+				<entry key="NullPointerException" value="NullPointerException"></entry>
+			</map>
+		</property>
+		
+		<!-- this is default or generic handler -->
+		<property name="defaultErrorView" value="Exception"/>
+		
+		<!-- Logger, logging exception  -->
+		<property name="warnLogCategory" value="MVCLogger"/>
+	</bean>
+	
+</beans>

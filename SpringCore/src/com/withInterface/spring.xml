@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean id="triangle" class="com.withInterface.Triangle">
+		<property name="pointA" ref="point1"/>
+		<property name="pointB" ref="point2"/>
+		<property name="pointC" ref="point3"/>
+	</bean>
+	
+	<bean id="circle" class="com.withInterface.Circle">
+		<property name="center" ref="point1"/>
+	</bean>
+	
+
+	<bean id="point1" class="com.withInterface.Point">
+		<property name="x" value="0" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="point2" class="com.withInterface.Point">
+		<property name="x" value="20" />
+		<property name="y" value="0" />
+	</bean>
+
+	<bean id="point3" class="com.withInterface.Point">
+		<property name="x" value="0" />
+		<property name="y" value="20" />
+	</bean>
+
+</beans>
